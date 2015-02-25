@@ -1,10 +1,10 @@
 require 'sinatra'
 
-get '/' do
-  "the time where this server lives is #{Time.now}
-    <br /><br />check out your <a href=\"/agent\">user_agent</a>"
-end
+set :port, ENV["PORT"] || 5000
 
-get '/agent' do
-  "you're using #{request.user_agent}"
+get '/' do
+  whom = ENV["POWERED_BY"] || "OpenShift!"
+  container = `hostname`.strip || "unknown"
+  "Powered by " + whom + "\nRunning on container ID " + container + "\n"
+
 end
